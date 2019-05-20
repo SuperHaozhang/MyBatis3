@@ -1,0 +1,18 @@
+[2019-05-20 10:29:17] DEBUG org.apache.ibatis.logging.LogFactory.setImplementation[:105] - Logging initialized using 'class org.apache.ibatis.logging.log4j2.Log4j2Impl' adapter.
+[2019-05-20 10:29:17] DEBUG org.apache.ibatis.logging.LogFactory.setImplementation[:105] - Logging initialized using 'class org.apache.ibatis.logging.log4j2.Log4j2Impl' adapter.
+[2019-05-20 10:29:17] DEBUG org.apache.ibatis.datasource.pooled.PooledDataSource.forceCloseAll[:334] - PooledDataSource forcefully closed/removed all connections.
+[2019-05-20 10:29:17] DEBUG org.apache.ibatis.datasource.pooled.PooledDataSource.forceCloseAll[:334] - PooledDataSource forcefully closed/removed all connections.
+[2019-05-20 10:29:17] DEBUG org.apache.ibatis.datasource.pooled.PooledDataSource.forceCloseAll[:334] - PooledDataSource forcefully closed/removed all connections.
+[2019-05-20 10:29:17] DEBUG org.apache.ibatis.datasource.pooled.PooledDataSource.forceCloseAll[:334] - PooledDataSource forcefully closed/removed all connections.
+[2019-05-20 10:29:17] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction.openConnection[:136] - Opening JDBC Connection
+[2019-05-20 10:29:18] DEBUG org.apache.ibatis.datasource.pooled.PooledDataSource.popConnection[:405] - Created connection 1332210474.
+[2019-05-20 10:29:18] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction.setDesiredAutoCommit[:100] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@4f67eb2a]
+[2019-05-20 10:29:18] DEBUG com.cheer.mybatis.mapper.EmpMapper.getemp.debug[:143] - ==>  Preparing: select * from emp where empno = ? 
+[2019-05-20 10:29:18] DEBUG com.cheer.mybatis.mapper.EmpMapper.getemp.debug[:143] - ==> Parameters: 7788(Integer)
+[2019-05-20 10:29:18] TRACE com.cheer.mybatis.mapper.EmpMapper.getemp.trace[:149] - <==    Columns: empno, ename, job, mgr, hiredate, sal, com, deptno
+[2019-05-20 10:29:18] TRACE com.cheer.mybatis.mapper.EmpMapper.getemp.trace[:149] - <==        Row: 7788, SCOTT, ANALYST, 7566, 1987-07-13, 3000.00, null, 20
+[2019-05-20 10:29:18] DEBUG com.cheer.mybatis.mapper.EmpMapper.getemp.debug[:143] - <==      Total: 1
+[2019-05-20 10:29:18] INFO  Test01.test01[:31] - EmpMapper [com=null, ename=SCOTT, mgr=7566, empno=7788, job=ANALYST, hiredate=1987-07-13, deptno=20, sal=3000.0]
+[2019-05-20 10:29:18] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction.resetAutoCommit[:122] - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@4f67eb2a]
+[2019-05-20 10:29:18] DEBUG org.apache.ibatis.transaction.jdbc.JdbcTransaction.close[:90] - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@4f67eb2a]
+[2019-05-20 10:29:18] DEBUG org.apache.ibatis.datasource.pooled.PooledDataSource.pushConnection[:362] - Returned connection 1332210474 to pool.
