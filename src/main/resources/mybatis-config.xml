@@ -29,6 +29,7 @@
         <mapper resource="mapper/EmpMapper.xml"/>
         <mapper resource="mapper/EmpMapperPlus.xml"/>
         <mapper resource="mapper/DeptMapper.xml"/>
+        <mapper resource="mapper/EmpMapperDynamicSQL.xml"/>"/>
 
     </mappers>
 </configuration>
