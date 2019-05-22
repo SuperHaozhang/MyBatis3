@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheer.mybatis.mapper.EmpMapperPlus">
+    <!--Emp getemp(Integer empno);-->
+    <!--自定义某个javabean的封装规则
+        type：自定义规则
+        id：唯一引用方便
+    -->
+    <resultMap id="myEmp" type="com.cheer.mybatis.demo.Emp">
+        <id column="empno" property="empno"></id>
+        <result column="ename" property="ename"></result>
+        <result column="job" property="job"></result>
+        <result column="mgr" property="mgr"></result>
+        <result column="hiredate" property="hiredate"></result>
+        <result column="sal" property="sal"></result>
+        <result column="com" property="com"></result>
+    </resultMap>
+    <select id="getemp" resultMap="myEmp">
+        select * from emp where empno = #{empno}
+    </select>
+
+
+    <resultMap type="com.cheer.mybatis.demo.Emp" id="MyEmp1" >
+        <id column="empno" property="empno"></id>
+        <result column="ename" property="ename"></result>
+        <result column="dno" property="deptno.deptno"></result>
+        <result column="dl" property="deptno.loc"></result>
+
+    </resultMap>
+
+    <resultMap type="com.cheer.mybatis.demo.Emp" id="MyEmp2" >
+        <id column="empno" property="empno"></id>
+        <result column="ename" property="ename"></result>
+        <!--association
+            property:指定哪个属性是联合对象
+        -->
+        <association property="deptno" javaType="com.cheer.mybatis.demo.Dept">
+            <id column="dno" property="deptno"/>
+            <result column="dl" property="loc"/>
+        </association>
+    </resultMap>
+
+    <select id="getempanddept" resultMap="MyEmp2">
+        SELECT emp.*,d.deptno dno,d.loc dl
+        from emp ,dept d
+        where emp.deptno=d.deptno
+        and emp.empno=#{empno}
+    </select>
+
+    <!--
+        使用association分步查询
+        1、先按员工id查询员工信息
+        2、查询员工信息中deptno去部门表查出部门信息
+    -->
+    <resultMap id="myEmpstep" type="com.cheer.mybatis.demo.Emp">
+        <id column="empno" property="empno"/>
+        <result column="ename" property="ename"/>
+        <!--    association定义关联对象的封装规则
+                select:表名当前属性是调用select指定方法查出结果
+                column:指定将哪一列的值传给这个方法
+                -->
+        <association property="deptno"
+                     select="com.cheer.mybatis.mapper.DeptMapper.getDeptByno"
+                     column="deptno"
+        ></association>
+    </resultMap>
+    <!--Emp getempStep(Integer empno);-->
+    <select id="getempStep" resultMap="myEmpstep">
+        select * from  emp where empno = #{empno}
+    </select>
+    <!--List<Emp> getEmpByDeptID(Integer deptno);-->
+    <select id="getEmpByDeptID" resultType="com.cheer.mybatis.demo.Emp">
+        select * from emp where deptno=#{deptno}
+    </select>
+
+
+
+</mapper>

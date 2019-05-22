@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheer.mybatis.mapper.DeptMapper">
+    <!--Dept getDeptByno(Integer deptno)-->
+    <select id="getDeptByno" resultType="com.cheer.mybatis.demo.Dept">
+        select * from dept where deptno=#{deptno}
+    </select>
+
+    <resultMap id="Mydept" type="com.cheer.mybatis.demo.Dept">
+        <id column="dno" property="deptno"></id>
+        <result column="dl" property="loc"></result>
+        <result column="da" property="dname"></result>
+        <!--collection：定义关联集合类型属性的封装
+            ofType
+        -->
+        <collection property="emps"  ofType="com.cheer.mybatis.demo.Emp" >
+            <!--定义这个集合里面元素的封装规则-->
+            <id column="empno" property="empno"></id>
+            <result column="ename" property="ename"></result>
+            <result column="job" property="job"></result>
+        </collection>
+    </resultMap>
+    <!--Dept getDeptBynoPlus(Integer deptno);当前部门的所有员工-->
+    <select id="getDeptBynoPlus" resultMap="Mydept">
+        select d.deptno dno,d.loc dl,d.dname da,e.*
+        from dept d
+        LEFT JOIN emp e
+        on d.deptno=e.deptno
+        where d.deptno=#{deptno}
+    </select>
+
+    <resultMap id="MydeptStep" type="com.cheer.mybatis.demo.Dept">
+        <id column="dn" property="deptno"></id>
+        <result column="da" property="dname"></result>
+        <result column="dl" property="loc"></result>
+        <collection property="emps"
+                    select="com.cheer.mybatis.mapper.EmpMapperPlus.getEmpByDeptID"
+                    column="dn"
+        ></collection>
+    </resultMap>
+    <!--Dept getDeptBynoStep(Integer deptno);-->
+    <select id="getDeptBynoStep" resultMap="MydeptStep">
+        select d.deptno dn,d.dname da,d.loc dl from dept d where deptno=#{deptno}
+    </select>
+</mapper>

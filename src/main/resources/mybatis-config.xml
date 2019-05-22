@@ -3,12 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    
+
     <properties resource="db.properties"></properties>
 
-<!--    -->
+    <!--  设置log4j配置文件  -->
     <settings>
         <setting name="logImpl" value="log4j2"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
 
     <environments default="development">
@@ -23,6 +25,10 @@
         </environment>
     </environments>
     <mappers>
+        <!--批量注册-->
         <mapper resource="mapper/EmpMapper.xml"/>
+        <mapper resource="mapper/EmpMapperPlus.xml"/>
+        <mapper resource="mapper/DeptMapper.xml"/>
+
     </mappers>
 </configuration>
